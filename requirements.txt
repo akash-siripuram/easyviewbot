@@ -1,3 +1,2 @@
 streamlit
 pandas
-sqlite3>=3.23.1
