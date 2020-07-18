@@ -1,14 +1,14 @@
 import streamlit as st
 import sqlite3
 import pandas as pd
-import time
+
 con=sqlite3.connect("bismillah.db")
 c=con.cursor()
 
 
 
 def create_usertable():
-	c.execute("CREATE TABLE IF NOT EXISTS user_table2(instalink Text NOT NULL,plan text NOT NULL,ph_no text NOT NULL,transaction_date DATETIME DEFAULT CURRENT_TIMESTAMP NOT NULL)")
+	c.execute("CREATE TABLE IF NOT EXISTS user_table2(instalink Text NOT NULL,plan text NOT NULL,ph_no text NOT NULL)")
 	
 
 def add_userdata(instalink,plan,ph_no):
@@ -16,15 +16,15 @@ def add_userdata(instalink,plan,ph_no):
 	con.commit()
 
 def view_link_plan():
-	c.execute("Select instalink as Instagram_Link,plan as Selected_Plan,transaction_date from user_table2 ")
+	c.execute("Select instalink as Instagram_Link,plan as Selected_Plan from user_table2")
 	data=c.fetchall()
 	return data
 def view_plan_phno():
-	c.execute("Select plan as Selected_Plan,ph_no as Phone_Number,transaction_date from user_table2 ")
+	c.execute("Select plan as Selected_Plan,ph_no as Phone_Number from user_table2")
 	data=c.fetchall()
 	return data
 def view_phno_link():
-	c.execute("Select instalink as Instagram_Link,ph_no as Phone_Number,transaction_date from user_table2")
+	c.execute("Select instalink as Instagram_Link,ph_no as Phone_Number from user_table2")
 	data=c.fetchall()
 	return data
 def delete_table():
