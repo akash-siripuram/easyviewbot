@@ -211,7 +211,7 @@ def normal_user():
 
 def main():
 	
-	admin_status=st.checkbox("",["Normal User","Admin"])
+	admin_status=st.radio("",["Normal User","Admin"])
 	#st.write(admin_status)
 	if admin_status == "Normal User":
 		#m,j,k=normal_user()
