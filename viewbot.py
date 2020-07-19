@@ -139,22 +139,22 @@ def normal_user():
 	title="""
 		<div style="background-color:#DD2A7B;padding:0px">
 		<h4 style="color:#ffffff;text-align:center;font-weight:bold;">Do you need Views, followers, likes on instagram ?</h4>
-		<h4 style="color:#ffffff;text-align:center;font-weight:bold;">We are here to rescue you</h4>
-		<h4 style="color:#ffffff;text-align:center;font-weight:bold;">Increase your followers, views, likes in just 4 Steps</h4>
+		<h4 style="color:#ffffff;text-align:center;font-weight:bold;">We are here to help you</h4>
+		<h4 style="color:#ffffff;text-align:center;font-weight:bold;">Increase your social influence in just 4 Steps</h4>
 		</div>
 		"""
 	st.markdown(title,unsafe_allow_html=True)	
 	st.subheader("")
-	st.subheader("1. What do you want to increase (Select below)")
+	st.subheader("1. What do you want to increase")
 	var_a=st.radio("",["Views","Followers","Likes","Free Views"])
 	v_dic={1:"100 Views - 4 INR",2:"1000 Views - 5 INR",3:"10000 Views - 15 INR",4:"100000 Views - 150 INR"}
 	if var_a == "Views":
-		st.subheader("2. Select the plan (Select below)")
+		st.subheader("2. Select the plan")
 		
 		v_plan=st.radio("",["100 Views - 4 INR","1000 Views - 5 INR","10000 Views - 15 INR","100000 Views - 150 INR"])
 		st.warning("{} is selected".format(v_plan))
-		st.subheader("3. Enter your Phone number so that we can contact you")
-		ph_no=st.text_input("Enter Normally without country code","")
+		st.subheader("3. Enter your Phone number and relax, we will can contact you shortly")
+		ph_no=st.text_input("","+91- ")
 		if len(ph_no)==10:
 			buff=insta_link(v_plan,ph_no)
 					
@@ -163,15 +163,15 @@ def normal_user():
 			st.error("Enter correct Phone number")    
 	elif var_a == "Followers":
 		v_plan=""
-		st.subheader("2. Select the plan (Select below)")
+		st.subheader("2. Select the plan")
 		p=st.radio("",["No Refill - Followers will not be added if decreased","Refill - If the followers gets decreased within next 15 days we will refill it"])
 		if p == "No Refill - Followers will not be added if decreased":
 			v_plan=st.radio("",["50 Followers - 7 INR","100 Followers - 12 INR","200 Followers - 22 INR","400 Followers - 40 INR","500 Followers - 70 INR","1,000 Followers - 100 INR"])
 		elif p == "Refill - If the followers gets decreased within next 15 days we will refill it":
 			v_plan=st.radio("",["100 Followwers - 39 INR","200 Followers - 78 INR","300 Followers - 115 INR","500 Followers - 193 INR","1000 Followers - 386 INR"])
 		st.warning("{} is selected".format(v_plan))
-		st.subheader("3. Enter your Phone number so that we can contact you")
-		ph_no=st.text_input("Enter Normally without country code","")
+		st.subheader("3. Enter your Phone number and relax, we will can contact you shortly")
+		ph_no=st.text_input("","+91- ")
 		if len(ph_no)==10:
 			buff=insta_link(v_plan,ph_no)
 					
@@ -180,12 +180,12 @@ def normal_user():
 			st.error("Enter correct Phone number") 
 		#st.warning("{} is selected".format(v_plan))
 	elif var_a == "Likes":
-		st.subheader("2. Select the plan (Select below)")
+		st.subheader("2. Select the plan")
 		
 		v_plan=st.radio("",["100 Likes - 9 INR","200 Likes - 17 INR","300 Likes - 24 INR","400 Likes - 31 INR","500 Likes - 38 INR","1000 Likes - 73 INR"])
 		st.warning("{} is selected".format(v_plan))
-		st.subheader("3. Enter your Phone number so that we can contact you")
-		ph_no=st.text_input("Enter Normally without country code","")
+		st.subheader("3. Enter your Phone number and relax, we will can contact you shortly")
+		ph_no=st.text_input("","+91- ")
 		if len(ph_no)==10:
 			buff=insta_link(v_plan,ph_no)
 					
@@ -198,8 +198,8 @@ def normal_user():
 		
 		v_plan="100 Free Views"
 		st.warning("{} is selected".format(v_plan))
-		st.subheader("3. Enter your Phone number so that we can contact you")
-		ph_no=st.text_input("Enter Normally without country code","")
+		st.subheader("3. Enter your Phone number and relax, we will can contact you shortly")
+		ph_no=st.text_input("","+91- ")
 		if len(ph_no)==10:
 			buff=insta_link(v_plan,ph_no)
 					
@@ -211,7 +211,7 @@ def normal_user():
 
 def main():
 	
-	admin_status=st.radio("",["Normal User","Admin"])
+	admin_status=st.checkbox("",["Normal User","Admin"])
 	#st.write(admin_status)
 	if admin_status == "Normal User":
 		#m,j,k=normal_user()
