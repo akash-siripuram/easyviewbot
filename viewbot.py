@@ -47,7 +47,7 @@ def insta_link(a,b):
 
 	
 	st.subheader("4. Enter your Instagram Post link")
-	if st.checkbox("Help"):
+	if st.checkbox("How to find my Instagram Link?"):
 		st.info("""
 		Follow these steps regarding how to select link	
 
@@ -67,28 +67,28 @@ def insta_link(a,b):
 		""")
 	link="a"	
 	link=st.text_input("Enter the link in the box","https://www.instagram.com/")
-	if len(link)>26:
-		st.error("Make sure your link is correct")
-		st.subheader("")
-		st.info("Your chosen plan is {}".format(a))
-		st.subheader("")
-		if a != "100 Free Views":
+	st.warning("Make sure your link is correct")
+	st.subheader("")
+	st.info("Your chosen plan is {}".format(a))
+	st.subheader("")
+	if a != "100 Free Views":
 
-		    st.success("Send Money to this Phone Number 9493736321 in Google Pay, Paytm, Phone pe")
-		    st.subheader("")
-		    if st.button("Click here after Payment"):
-		    	create_usertable()
-		    	add_userdata(link,a,b)
-		    	st.warning("Thank you, We will check your transaction and process your request")
-		    	st.warning("Your Request will be processed in less than 1 hr")
-		else:
-			st.success("We are paying for you, So it is free. Please share it with your friends")	
-			st.subheader("")
-			if st.button("Click here after Payment"):
-				create_usertable()
-				add_userdata(link,a,b)
-				st.warning("Thank you, We will check your transaction and process your request")
-				st.warning("Your Request will be processed in less than 1 hr")	
+	    st.info("Send Money to this below UPI Id")
+	    st.success("9493736321@okbizaxis")
+	    st.subheader("")
+	    if st.button("Click here after Payment"):
+		create_usertable()
+		add_userdata(link,a,b)
+		st.warning("Thank you, We will check your transaction and process your request")
+		st.warning("Your Request will be processed in less than 1 hr")
+	else:
+		st.success("We are paying for you, So it is free. Please share it with your friends")	
+		st.subheader("")
+		if st.button("Click here, We paid for you"):
+			create_usertable()
+			add_userdata(link,a,b)
+			st.warning("Thank you, We will check your transaction and process your request")
+			st.warning("Your Request will be processed in less than 1 hr")	
 
 
 
@@ -120,6 +120,32 @@ def admin():
 		elif s== "Plan":
 			data=view_plan()
 			st.dataframe(data)
+			plann=st.selectbox("Dear, Admin These are the Links to the Plans",("Views","No_Refill-Followers","Refill-Followers","Likes","Free_Views"))
+			if plann == "Views":
+				st.write("https://socialdaddy.in/default.aspx?cat=55")
+				st.write("Select this -> 1.Insagram Views 2.Instagram Views [Working Instant]- 2 INR")
+			elif plann == "No_Refill-Followers":
+				st.write("https://socialdaddy.in/default.aspx?cat=55")
+				st.write("Select this -> 1.Instagram Followers(No-Refill) 2.Instagram Followers [10k Per Day] [Instant]- 78 INR")
+				
+			elif plann == "Refill-Followers":
+				st.write("https://socialdaddy.in/default.aspx?cat=55")
+				st.write("Select this -> 1.Instagram Followers(Refill) 2.Instagram Followers [Real Users 2k Per Day] [15Days Refill]- 328 INR")
+				
+			elif plann == "Likes":
+				st.write("https://socialdaddy.in/default.aspx?cat=55")
+				st.write("Select this -> 1.Instagram Likes 2.Instagram Likes [15k] [Working After Update]- 57 INR")
+				
+			elif plann == "Free_Views":
+				st.write("https://famoid.com/get-free-instagram-views/")
+				
+				
+				
+			
+			
+				
+				
+				
 			
 			
 		
@@ -155,29 +181,20 @@ def normal_user():
 		st.warning("{} is selected".format(v_plan))
 		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
 		ph_no=st.text_input("","+91- ")
-		if len(ph_no)==15:
-			buff=insta_link(v_plan,ph_no)
-					
-					
-		else:
-			st.error("Enter correct Phone number")    
+	        buff=insta_link(v_plan,ph_no)
+					    
 	elif var_a == "Followers":
 		v_plan=""
 		st.subheader("2. Select the plan")
-		p=st.radio("",["No Refill - Followers will not be added if decreased","Refill - If the followers gets decreased within next 15 days we will refill it"])
+		p=st.radio("",["No Refill - Followers will not be added if decreased","Refill - Followers will be added again if decreased in next 15 days"])
 		if p == "No Refill - Followers will not be added if decreased":
-			v_plan=st.radio("",["50 Followers - 7 INR","100 Followers - 12 INR","200 Followers - 22 INR","400 Followers - 40 INR","500 Followers - 70 INR","1,000 Followers - 100 INR"])
-		elif p == "Refill - If the followers gets decreased within next 15 days we will refill it":
+			v_plan=st.radio("",["50 Followers - 7 INR","100 Followers - 12 INR","200 Followers - 22 INR","400 Followers - 40 INR","500 Followers - 60 INR","1,000 Followers - 100 INR"])
+		elif p == "Refill - Followers will be added again if decreased in next 15 days":
 			v_plan=st.radio("",["100 Followwers - 39 INR","200 Followers - 78 INR","300 Followers - 115 INR","500 Followers - 193 INR","1000 Followers - 386 INR"])
 		st.warning("{} is selected".format(v_plan))
 		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
 		ph_no=st.text_input("","+91- ")
-		if len(ph_no)==10:
-			buff=insta_link(v_plan,ph_no)
-					
-					
-		else:
-			st.error("Enter correct Phone number") 
+		buff=insta_link(v_plan,ph_no)			 
 		#st.warning("{} is selected".format(v_plan))
 	elif var_a == "Likes":
 		st.subheader("2. Select the plan")
@@ -186,26 +203,19 @@ def normal_user():
 		st.warning("{} is selected".format(v_plan))
 		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
 		ph_no=st.text_input("","+91- ")
-		if len(ph_no)==10:
-			buff=insta_link(v_plan,ph_no)
+		buff=insta_link(v_plan,ph_no)
 					
 					
-		else:
-			st.error("Enter correct Phone number")
 	else:
-		st.subheader("2. You will get free views on your video.")
+		st.subheader("2. You will get free views on your last uploaded video.")
 		st.info("We are paying for you. So, that you trust, use and share our website")
 		
 		v_plan="100 Free Views"
 		st.warning("{} is selected".format(v_plan))
 		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
 		ph_no=st.text_input("","+91- ")
-		if len(ph_no)==10:
-			buff=insta_link(v_plan,ph_no)
+		buff=insta_link(v_plan,ph_no)
 					
-					
-		else:
-			st.error("Enter correct Phone number")
 			 
 		#st.warning("{} is selected".format(v_plan))	
 
