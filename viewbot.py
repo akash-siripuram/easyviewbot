@@ -131,7 +131,7 @@ def admin():
 def normal_user():
 	head="""
 		<div style="background-color:#515BD4;padding:0px">
-		<h2 style="color:#ffffff;text-align:center;font-weight:bold;">View Bot</h2>		
+		<h2 style="color:#ffffff;text-align:center;font-weight:bold;">Easy-ViewBot</h2>		
 		</div>
 		"""
 	st.markdown(head,unsafe_allow_html=True)
