@@ -116,12 +116,6 @@ def insta_link(a,b,c):
 			else:
 				st.warning("Fields are missing")			
 
-		    	
-
-					
-
-
-
 def admin():
 	st.write("You are in admin page now")
 	st.warning("This page is for Admin")
@@ -172,19 +166,6 @@ def admin():
 			st.write("https://temp-mail.org/en/")		
 			
 				
-				
-			
-			
-				
-				
-				
-			
-			
-		
-		
-
-
-
 
 def normal_user():
 	head="""
@@ -220,7 +201,7 @@ def normal_user():
 		else:
 			st.warning("Enter correct phone number")
 
-		buff=insta_link(v_plan,ph_no,1)
+		buff=insta_link(v_plan,ph_no,0)
 					    
 	elif var_a == "Followers":
 		v_plan=""
