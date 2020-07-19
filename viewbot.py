@@ -43,52 +43,82 @@ def view_plan():
 
 
 
-def insta_link(a,b):
+def insta_link(a,b,c):
 
-	
-	st.subheader("4. Enter your Instagram Post link")
-	if st.checkbox("How to find my Instagram Link?"):
-		st.info("""
-		Follow these steps regarding how to select link	
-
-		
-        To get a link to a post in Android and ios:
-
-                 1.Tap ...(Three dots) above the post.
-                 2.Tap Copy Link.
-
-        To get a link to a post from the web:
-
-                 1.Open your web browser.
-                 2.Go to instagram.com/username. For example, if the username is "johnsmith," type in instagram.com/johnsmith as the URL.
-                 3.Click the post you want to save and copy the link at the top of your browser.
-
-
-		""")
-	link="a"	
-	link=st.text_input("Enter the link in the box","https://www.instagram.com/")
-	st.warning("Make sure your link is correct")
-	st.subheader("")
-	st.info("Your chosen plan is {}".format(a))
-	st.subheader("")
-	if a != "100 Free Views":
-
-	    st.info("Send Money to this below UPI Id")
-	    st.success("9493736321@okbizaxis")
-	    st.subheader("")
-	    if st.button("Click here after Payment"):
-		create_usertable()
-		add_userdata(link,a,b)
-		st.warning("Thank you, We will check your transaction and process your request")
-		st.warning("Your Request will be processed in less than 1 hr")
-	else:
+	if c ==1 :
+		st.subheader("4. Enter your Instagram ID")
+		link="a"	
+		link=st.text_input("","https://www.instagram.com/")
+		st.info("Make sure your ID is correct")
 		st.success("We are paying for you, So it is free. Please share it with your friends")	
 		st.subheader("")
 		if st.button("Click here, We paid for you"):
-			create_usertable()
-			add_userdata(link,a,b)
-			st.warning("Thank you, We will check your transaction and process your request")
-			st.warning("Your Request will be processed in less than 1 hr")	
+			if len(link) > 26 and len(b) ==14:
+				create_usertable()
+				add_userdata(link,a,b)
+				st.write("You have completed it in just 4 Steps")
+				st.subheader("")
+				st.warning("Thank you, We will check your transaction and process your request")
+				st.warning("Your Request will be processed in less than 1 hr")
+			else:
+				st.warning("Fields are missing")
+
+	elif c==0:
+		
+		st.subheader("4. Enter your Instagram Post link")
+		if st.checkbox("How to find my Instagram Link?"):
+			st.info("""
+			Follow these steps regarding how to select link	
+			
+	        To get a link to a post in Android and ios:
+	                 1.Tap ...(Three dots) above the post.
+	                 2.Tap Copy Link.
+	        To get a link to a post from the web:
+	                 1.Open your web browser.
+	                 2.Go to instagram.com/username. For example, if the username is "johnsmith," type in instagram.com/johnsmith as the URL.
+	                 3.Click the post you want to save and copy the link at the top of your browser.
+			""")
+		link="a"	
+		link=st.text_input("","https://www.instagram.com/")
+		st.info("Make sure your link is correct")
+		#st.subheader("")
+		#st.warning("Your chosen plan is {}".format(a))
+		#st.subheader("")
+		st.success("Send your plan amount ({}) to this UPI ID -  9493736321@okbizaxis  ".format(a))
+		st.subheader("")
+		if st.button("Click here after Payment"):
+			if len(link) > 26 and len(b) ==14:
+				create_usertable()
+				add_userdata(link,a,b)
+				st.write("You have completed it in just 4 Steps")
+				st.warning("Thank you, We will check your transaction and process your request")
+				st.warning("Your Request will be processed in less than 1 hr")
+			else:
+				st.warning("Fields are missing")
+	else:
+		
+		st.subheader("4. Enter your Instagram ID")
+		link="a"	
+		link=st.text_input("","https://www.instagram.com/")
+		st.info("Make sure your ID is correct")
+		#st.subheader("")
+		#st.warning("Your chosen plan is {}".format(a))
+		#st.subheader("")
+		st.success("Send your plan amount ({}) to this UPI ID -  9493736321@okbizaxis  ".format(a))
+		st.subheader("")
+		if st.button("Click here after Payment"):
+			if len(link) > 26 and len(b) ==14:
+				create_usertable()
+				add_userdata(link,a,b)
+				st.write("You have completed it in just 4 Steps")
+				st.warning("Thank you, We will check your transaction and process your request")
+				st.warning("Your Request will be processed in less than 1 hr")
+			else:
+				st.warning("Fields are missing")			
+
+		    	
+
+					
 
 
 
@@ -120,25 +150,27 @@ def admin():
 		elif s== "Plan":
 			data=view_plan()
 			st.dataframe(data)
-			plann=st.selectbox("Dear, Admin These are the Links to the Plans",("Views","No_Refill-Followers","Refill-Followers","Likes","Free_Views"))
-			if plann == "Views":
-				st.write("https://socialdaddy.in/default.aspx?cat=55")
-				st.write("Select this -> 1.Insagram Views 2.Instagram Views [Working Instant]- 2 INR")
-			elif plann == "No_Refill-Followers":
-				st.write("https://socialdaddy.in/default.aspx?cat=55")
-				st.write("Select this -> 1.Instagram Followers(No-Refill) 2.Instagram Followers [10k Per Day] [Instant]- 78 INR")
-				
-			elif plann == "Refill-Followers":
-				st.write("https://socialdaddy.in/default.aspx?cat=55")
-				st.write("Select this -> 1.Instagram Followers(Refill) 2.Instagram Followers [Real Users 2k Per Day] [15Days Refill]- 328 INR")
-				
-			elif plann == "Likes":
-				st.write("https://socialdaddy.in/default.aspx?cat=55")
-				st.write("Select this -> 1.Instagram Likes 2.Instagram Likes [15k] [Working After Update]- 57 INR")
-				
-			elif plann == "Free_Views":
-				st.write("https://famoid.com/get-free-instagram-views/")
-				
+		st.subheader("Dear, Admin These are the Links to the Plans")	
+		plann=st.selectbox("",("Views","No_Refill-Followers","Refill-Followers","Likes","Free_Followers"))
+		if plann == "Views":
+			st.write("https://socialdaddy.in/default.aspx?cat=55")
+			st.write("Select this -> 1.Insagram Views 2.Instagram Views [Working Instant]- 2 INR")
+		elif plann == "No_Refill-Followers":
+			st.write("https://socialdaddy.in/default.aspx?cat=55")
+			st.write("Select this -> 1.Instagram Followers(No-Refill) 2.Instagram Followers [10k Per Day] [Instant]- 78 INR")
+			
+		elif plann == "Refill-Followers":
+			st.write("https://socialdaddy.in/default.aspx?cat=55")
+			st.write("Select this -> 1.Instagram Followers(Refill) 2.Instagram Followers [Real Users 2k Per Day] [15Days Refill]- 328 INR")
+			
+		elif plann == "Likes":
+			st.write("https://socialdaddy.in/default.aspx?cat=55")
+			st.write("Select this -> 1.Instagram Likes 2.Instagram Likes [15k] [Working After Update]- 57 INR")
+			
+		elif plann == "Free_Followers":
+			st.write("https://famoid.com/get-free-instagram-followers/")
+			st.write("https://temp-mail.org/en/")		
+			
 				
 				
 			
@@ -172,16 +204,23 @@ def normal_user():
 	st.markdown(title,unsafe_allow_html=True)	
 	st.subheader("")
 	st.subheader("1. What do you want to increase")
-	var_a=st.radio("",["Views","Followers","Likes","Free Views"])
+	var_a=st.radio("",["Views","Followers","Likes","Free Followers"])
 	v_dic={1:"100 Views - 4 INR",2:"1000 Views - 5 INR",3:"10000 Views - 15 INR",4:"100000 Views - 150 INR"}
 	if var_a == "Views":
 		st.subheader("2. Select the plan")
 		
 		v_plan=st.radio("",["100 Views - 4 INR","1000 Views - 5 INR","10000 Views - 15 INR","100000 Views - 150 INR"])
-		st.warning("{} is selected".format(v_plan))
+		#st.warning("{} is selected".format(v_plan))
 		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
-		ph_no=st.text_input("","+91- ")
-	        buff=insta_link(v_plan,ph_no)
+		ph_no=st.text_input("","+91-")
+		if len(ph_no) == 4:
+			st.write("")
+		elif len(ph_no) == 14:
+			st.write("")
+		else:
+			st.warning("Enter correct phone number")
+
+		buff=insta_link(v_plan,ph_no,1)
 					    
 	elif var_a == "Followers":
 		v_plan=""
@@ -193,8 +232,15 @@ def normal_user():
 			v_plan=st.radio("",["100 Followwers - 39 INR","200 Followers - 78 INR","300 Followers - 115 INR","500 Followers - 193 INR","1000 Followers - 386 INR"])
 		st.warning("{} is selected".format(v_plan))
 		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
-		ph_no=st.text_input("","+91- ")
-		buff=insta_link(v_plan,ph_no)			 
+		ph_no=st.text_input("","+91-")
+		if len(ph_no) == 4:
+			st.write("")
+		elif len(ph_no) == 14:
+			st.write("")
+		else:
+			st.warning("Enter correct phone number")
+
+		buff=insta_link(v_plan,ph_no,9)			 
 		#st.warning("{} is selected".format(v_plan))
 	elif var_a == "Likes":
 		st.subheader("2. Select the plan")
@@ -202,21 +248,39 @@ def normal_user():
 		v_plan=st.radio("",["100 Likes - 9 INR","200 Likes - 17 INR","300 Likes - 24 INR","400 Likes - 31 INR","500 Likes - 38 INR","1000 Likes - 73 INR"])
 		st.warning("{} is selected".format(v_plan))
 		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
-		ph_no=st.text_input("","+91- ")
-		buff=insta_link(v_plan,ph_no)
+		ph_no=st.text_input("","+91-")
+		if len(ph_no) == 4:
+			st.write("")
+		elif len(ph_no) == 14:
+			st.write("")
+		else:
+			st.warning("Enter correct phone number")
+
+		buff=insta_link(v_plan,ph_no,0)
 					
 					
 	else:
-		st.subheader("2. You will get free views on your last uploaded video.")
+		st.subheader("2. You will get free Followers.")
 		st.info("We are paying for you. So, that you trust, use and share our website")
 		
-		v_plan="100 Free Views"
+		v_plan="25 Free Followers"
 		st.warning("{} is selected".format(v_plan))
 		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
-		ph_no=st.text_input("","+91- ")
-		buff=insta_link(v_plan,ph_no)
+		ph_no=st.text_input("","+91-")
+		if len(ph_no) == 4:
+			st.write("")
+		elif len(ph_no) == 14:
+			st.write("")
+		else:
+			st.warning("Enter correct phone number")
+
+		buff=insta_link(v_plan,ph_no,1)
 					
-			 
+	st.subheader(" ")
+	st.subheader(" ")
+	st.subheader(" ")
+	st.subheader(" ")
+	st.write("Contact us  -  easy-viewbot@protonmail.com")
 		#st.warning("{} is selected".format(v_plan))	
 
 def main():
@@ -236,25 +300,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
