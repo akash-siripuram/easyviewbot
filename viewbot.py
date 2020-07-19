@@ -88,7 +88,7 @@ def admin():
 	st.warning("This page is for Admin")
 	st.info("If you are user, please select Normal user option to use this website")
 	a=st.text_input("Username","admin")
-	b=st.text_input("Password","")
+	b=st.text_input("Password","",type="password")
 	if a == "admin" and (b=="insta" or b == "Insta"):
 		st.success("You logged in as admin")
 		st.subheader("What do you want to view")
