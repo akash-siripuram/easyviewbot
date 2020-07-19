@@ -29,6 +29,15 @@ def view_phno_link():
 	return data
 def delete_table():
 	c.execute("DROP TABLE user_table2")
+	
+def view_instalink():
+	c.execute("Select instalink from user_table2")
+	data=c.fetchall()
+	return data
+def view_plan():
+	c.execute("Select plan from user_table2")
+	data=c.fetchall()
+	return data
 
 #----------------------------------------
 
@@ -92,7 +101,7 @@ def admin():
 	if a == "admin" and (b=="insta" or b == "Insta"):
 		st.success("You logged in as admin")
 		st.subheader("What do you want to view")
-		s=st.selectbox("",["Plan and Phone number","Instagram Link and Plan","Instagram Link and Phone Number"])
+		s=st.selectbox("",["Plan and Phone number","Instagram Link and Plan","Instagram Link and Phone Number","Instagram Link","Plan"])
 		if s == "Plan and Phone number":
 			data=view_plan_phno()
 			df=pd.DataFrame(data)
@@ -105,6 +114,15 @@ def admin():
 		elif s== "Instagram Link and Phone Number":
 			data=view_phno_link()
 			st.dataframe(data)
+		elif s== "Instagram Link":
+			data=view_instalink()
+			st.dataframe(data)
+		elif s== "Plan":
+			data=view_plan()
+			st.dataframe(data)
+			
+			
+		
 		
 
 
