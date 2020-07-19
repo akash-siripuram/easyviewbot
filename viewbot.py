@@ -170,7 +170,7 @@ def normal_user():
 		elif p == "Refill - If the followers gets decreased within next 15 days we will refill it":
 			v_plan=st.radio("",["100 Followwers - 39 INR","200 Followers - 78 INR","300 Followers - 115 INR","500 Followers - 193 INR","1000 Followers - 386 INR"])
 		st.warning("{} is selected".format(v_plan))
-		st.subheader("3. Enter your Phone number and relax, we will can contact you shortly")
+		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
 		ph_no=st.text_input("","+91- ")
 		if len(ph_no)==10:
 			buff=insta_link(v_plan,ph_no)
@@ -184,7 +184,7 @@ def normal_user():
 		
 		v_plan=st.radio("",["100 Likes - 9 INR","200 Likes - 17 INR","300 Likes - 24 INR","400 Likes - 31 INR","500 Likes - 38 INR","1000 Likes - 73 INR"])
 		st.warning("{} is selected".format(v_plan))
-		st.subheader("3. Enter your Phone number and relax, we will can contact you shortly")
+		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
 		ph_no=st.text_input("","+91- ")
 		if len(ph_no)==10:
 			buff=insta_link(v_plan,ph_no)
@@ -198,7 +198,7 @@ def normal_user():
 		
 		v_plan="100 Free Views"
 		st.warning("{} is selected".format(v_plan))
-		st.subheader("3. Enter your Phone number and relax, we will can contact you shortly")
+		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
 		ph_no=st.text_input("","+91- ")
 		if len(ph_no)==10:
 			buff=insta_link(v_plan,ph_no)
