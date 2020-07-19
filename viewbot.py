@@ -153,9 +153,9 @@ def normal_user():
 		
 		v_plan=st.radio("",["100 Views - 4 INR","1000 Views - 5 INR","10000 Views - 15 INR","100000 Views - 150 INR"])
 		st.warning("{} is selected".format(v_plan))
-		st.subheader("3. Enter your Phone number and relax, we will can contact you shortly")
+		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
 		ph_no=st.text_input("","+91- ")
-		if len(ph_no)==10:
+		if len(ph_no)==15:
 			buff=insta_link(v_plan,ph_no)
 					
 					
