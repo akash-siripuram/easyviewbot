@@ -360,7 +360,7 @@ def normal_user():
 			if b[0] == "Success":
 				st.success("Your order is Successful")
 			else:
-				st.info("Don't Worry, your order is under process. We let you know when it is finished")
+				st.info("Don't Worry, your order is under process. We will let you know when it is finished")
 		except:
 			st.warning("Please enter correct order ID")	
 
