@@ -8,11 +8,11 @@ c=con.cursor()
 
 
 def create_usertable():
-	c.execute("CREATE TABLE IF NOT EXISTS user_table2(instalink Text NOT NULL,plan text NOT NULL,ph_no text NOT NULL)")
+	c.execute("CREATE TABLE IF NOT EXISTS user_table2(id integer primary key autoincrement, instalink Text NOT NULL,plan text NOT NULL,ph_no text NOT NULL,status text)")
 	
 
-def add_userdata(instalink,plan,ph_no):
-	c.execute("INSERT INTO user_table2(instalink,plan,ph_no) VALUES(?,?,?)",(instalink,plan,ph_no))
+def add_userdata(instalink,plan,ph_no,status):
+	c.execute("INSERT INTO user_table2(instalink,plan,ph_no,status) VALUES(?,?,?,?)",(instalink,plan,ph_no,status))
 	con.commit()
 
 def view_link_plan():
@@ -31,13 +31,27 @@ def delete_table():
 	c.execute("DROP TABLE user_table2")
 	
 def view_instalink():
-	c.execute("Select instalink from user_table2")
+	c.execute("Select id,instalink,status from user_table2")
 	data=c.fetchall()
 	return data
 def view_plan():
-	c.execute("Select plan from user_table2")
+	c.execute("Select id,plan,status from user_table2")
 	data=c.fetchall()
 	return data
+def change_status(status,row_id):
+	c.execute("update user_table2 set status=? where id =?",(status,row_id))
+	con.commit()
+def give_id(plan,ph_no):
+	c.execute("SELECT id FROM user_table2 where plan = ? and ph_no = ? ORDER BY id DESC LIMIT 2",(plan,ph_no))
+	data=c.fetchall()
+	return data
+def view_status(row_idd):
+	c.execute("Select status from user_table2 where id=?",(row_idd,))
+	data=c.fetchall()
+	return data
+
+
+
 
 #----------------------------------------
 
@@ -47,21 +61,44 @@ def insta_link(a,b,c):
 
 	if c ==1 :
 		st.subheader("4. Enter your Instagram ID")
-		link="a"	
-		link=st.text_input("","https://www.instagram.com/")
-		st.info("Make sure your ID is correct")
+		link="a"
+		if st.checkbox("How to find my Instagram ID?"):
+			st.info("""
+			Follow these steps regarding how to select ID
+			
+	        To get a link to a post in Android and ios:
+	                 1.Go to Profile.
+	                 2.Select Instagram Id on top of Edit Profie option.
+	        To get a link to a post from the web:
+	                 1.Go to Profile.
+	                 2.Select Instagram Id which is on Left side of Edit Profie option.
+			""")	
+		link=st.text_input("Copy and paste the ID below","")
+		st.info("Make sure your ID is correct and exact")
 		st.success("We are paying for you, So it is free. Please share it with your friends")	
 		st.subheader("")
 		if st.button("Click here, We paid for you"):
-			if len(link) > 26 and len(b) ==14:
+			if len(link) > 0 and len(b) ==14:
 				create_usertable()
-				add_userdata(link,a,b)
+				add_userdata(link,a,b,"Processing")
 				st.write("You have completed it in just 4 Steps")
+				payout="""
+				<div style="background-color:#DD2A7B;padding:0px">
+				<h2 style="color:#ffffff;text-align:center;font-weight:bold;">Payment</h2>
+				</div>
+				"""
+				st.markdown(payout,unsafe_allow_html=True)
+				st.warning("Your chosen plan is {}".format(a))
+				st.success("We are paying for you, So it is free. Please share it with your friends")
+				lis=give_id(a,b)
+				tup=lis[0]
+				st.write("You can track your order status with this id -> ",tup[0])
 				st.subheader("")
-				st.warning("Thank you, We will check your transaction and process your request")
-				st.warning("Your Request will be processed in less than 1 hr")
+				st.warning("Your Request will be processed in less than 1 hr after your payment")
+				#st.warning("")
 			else:
 				st.warning("Fields are missing")
+
 
 	elif c==0:
 		
@@ -79,40 +116,83 @@ def insta_link(a,b,c):
 	                 3.Click the post you want to save and copy the link at the top of your browser.
 			""")
 		link="a"	
-		link=st.text_input("","https://www.instagram.com/")
+		link=st.text_input("")
 		st.info("Make sure your link is correct")
 		#st.subheader("")
-		#st.warning("Your chosen plan is {}".format(a))
 		#st.subheader("")
-		st.success("Send your plan amount ({}) to this UPI ID -  9493736321@okbizaxis  ".format(a))
+		#st.success(" -  9493736321@okbizaxis  ".format(a))
 		st.subheader("")
-		if st.button("Click here after Payment"):
-			if len(link) > 26 and len(b) ==14:
+		if st.button("Click Here to submit"):
+			if len(link) > 0 and len(b) ==14:
 				create_usertable()
-				add_userdata(link,a,b)
+				add_userdata(link,a,b,"Processing")
 				st.write("You have completed it in just 4 Steps")
-				st.warning("Thank you, We will check your transaction and process your request")
-				st.warning("Your Request will be processed in less than 1 hr")
+				payout="""
+				<div style="background-color:#DD2A7B;padding:0px">
+				<h2 style="color:#ffffff;text-align:center;font-weight:bold;">Payment</h2>
+				</div>
+				"""
+				st.markdown(payout,unsafe_allow_html=True)
+				st.warning("Your chosen plan is {}".format(a))
+				st.success("""
+
+			    Send money using Google pay, Phone Pe, Paytm to this Number with Order ID(Mentioned below) as remarks	
+			
+	            9493736321
+
+			    """)
+				lis=give_id(a,b)
+				tup=lis[0]
+				st.write("You can track your order status with this id -> ",tup[0])
+				st.subheader("")
+				st.warning("Your Request will be processed in less than 1 hr after your paymemt")
+				#st.warning("Your Request will be processed in less than 1 hr")
 			else:
 				st.warning("Fields are missing")
 	else:
 		
 		st.subheader("4. Enter your Instagram ID")
-		link="a"	
-		link=st.text_input("","https://www.instagram.com/")
-		st.info("Make sure your ID is correct")
+		link="a"
+		if st.checkbox("How to find my Instagram ID?"):
+			st.info("""
+			Follow these steps regarding how to select ID
+			
+	        To get Instagram ID in Android and ios:
+	                 1.Go to Profile.
+	                 2.Select Instagram Id on top of Edit Profie option.
+	        To get Instagram ID from the web:
+	                 1.Go to Profile.
+	                 2.Select Instagram Id which is on Left side of Edit Profie option.
+			""")	
+		link=st.text_input("Copy and paste the ID below","")
+		st.info("Make sure your ID is correct and exact")
 		#st.subheader("")
-		#st.warning("Your chosen plan is {}".format(a))
-		#st.subheader("")
-		st.success("Send your plan amount ({}) to this UPI ID -  9493736321@okbizaxis  ".format(a))
 		st.subheader("")
-		if st.button("Click here after Payment"):
-			if len(link) > 26 and len(b) ==14:
+		if st.button("Click here and send the money"):
+			if len(link) > 0 and len(b) ==14:
 				create_usertable()
-				add_userdata(link,a,b)
+				add_userdata(link,a,b,"Processing")
 				st.write("You have completed it in just 4 Steps")
-				st.warning("Thank you, We will check your transaction and process your request")
-				st.warning("Your Request will be processed in less than 1 hr")
+				payout="""
+				<div style="background-color:#DD2A7B;padding:0px">
+				<h2 style="color:#ffffff;text-align:center;font-weight:bold;">Payment</h2>
+				</div>
+				"""
+				st.markdown(payout,unsafe_allow_html=True)
+				st.warning("Your chosen plan is {}".format(a))
+				st.success("""
+
+			    Send money using Google pay, Phone Pe, Paytm to this Number with Order ID(Mentioned below) as remarks/message	
+			
+	            9493736321
+
+			    """)
+				lis=give_id(a,b)
+				tup=lis[0]
+				st.write("You can track your order status with this id -> ",tup[0])
+				st.subheader("")
+				st.warning("Your Request will be processed in less than 1 hr after your payment")
+				#st.warning("Your Request will be processed in less than 1 hr")
 			else:
 				st.warning("Fields are missing")			
 
@@ -144,18 +224,26 @@ def admin():
 		elif s== "Plan":
 			data=view_plan()
 			st.dataframe(data)
+		if st.button("Delete All Rows"):
+			delete_table()	
+		st.subheader("Dear, Admin Update enter user id and click success after transaction")
+		row_id=st.text_input("Enter the ID you have completed(Exactly)")
+		if st.button("Success"):
+			change_status("Success",row_id)
+
+			
 		st.subheader("Dear, Admin These are the Links to the Plans")	
 		plann=st.selectbox("",("Views","No_Refill-Followers","Refill-Followers","Likes","Free_Followers"))
 		if plann == "Views":
 			st.write("https://socialdaddy.in/default.aspx?cat=55")
-			st.write("Select this -> 1.Insagram Views 2.Instagram Views [Working Instant]- 2 INR")
+			st.write("Select this -> 1.Insagram Views 2.Instagram Likes [15k] [Working After Update]- 57 INR")
 		elif plann == "No_Refill-Followers":
 			st.write("https://socialdaddy.in/default.aspx?cat=55")
-			st.write("Select this -> 1.Instagram Followers(No-Refill) 2.Instagram Followers [10k Per Day] [Instant]- 78 INR")
+			st.write("Select this -> 1.Instagram Followers(No-Refill) 2.Instagram Followers Real Mixed [15k]- 130 INR")
 			
 		elif plann == "Refill-Followers":
 			st.write("https://socialdaddy.in/default.aspx?cat=55")
-			st.write("Select this -> 1.Instagram Followers(Refill) 2.Instagram Followers [Real Users 2k Per Day] [15Days Refill]- 328 INR")
+			st.write("Select this -> 1.Instagram Followers(Refill) 2.Instagram Followers [Refill 45 Days] [New]- 156 INR")
 			
 		elif plann == "Likes":
 			st.write("https://socialdaddy.in/default.aspx?cat=55")
@@ -163,7 +251,7 @@ def admin():
 			
 		elif plann == "Free_Followers":
 			st.write("https://famoid.com/get-free-instagram-followers/")
-			st.write("https://temp-mail.org/en/")		
+			st.write("https://temp-mail.org/en/")
 			
 				
 
@@ -185,12 +273,15 @@ def normal_user():
 	st.markdown(title,unsafe_allow_html=True)	
 	st.subheader("")
 	st.subheader("1. What do you want to increase")
+	st.info("** Please make your account PUBLIC for sometime if it is PRIVATE")
 	var_a=st.radio("",["Views","Followers","Likes","Free Followers"])
 	v_dic={1:"100 Views - 4 INR",2:"1000 Views - 5 INR",3:"10000 Views - 15 INR",4:"100000 Views - 150 INR"}
 	if var_a == "Views":
+		st.info("** Views are only for videos, If no videos exist in your account select other options(Likes, Followers)")
+
 		st.subheader("2. Select the plan")
 		
-		v_plan=st.radio("",["100 Views - 4 INR","1000 Views - 5 INR","10000 Views - 15 INR","100000 Views - 150 INR"])
+		v_plan=st.radio("",["100 Views - 4 INR","1000 Views - 9 INR","10000 Views - 29 INR [Recommended]","100000 Views - 49 INR"])
 		#st.warning("{} is selected".format(v_plan))
 		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
 		ph_no=st.text_input("","+91-")
@@ -206,11 +297,11 @@ def normal_user():
 	elif var_a == "Followers":
 		v_plan=""
 		st.subheader("2. Select the plan")
-		p=st.radio("",["No Refill - Followers will not be added if decreased","Refill - Followers will be added again if decreased in next 15 days"])
+		p=st.radio("",["No Refill - Followers will not be added if decreased","Refill - Followers will be added again if decreased in next 45 days"])
 		if p == "No Refill - Followers will not be added if decreased":
-			v_plan=st.radio("",["50 Followers - 7 INR","100 Followers - 12 INR","200 Followers - 22 INR","400 Followers - 40 INR","500 Followers - 60 INR","1,000 Followers - 100 INR"])
-		elif p == "Refill - Followers will be added again if decreased in next 15 days":
-			v_plan=st.radio("",["100 Followwers - 39 INR","200 Followers - 78 INR","300 Followers - 115 INR","500 Followers - 193 INR","1000 Followers - 386 INR"])
+			v_plan=st.radio("",["50 Followers - 9 INR","100 Followers - 16 INR","200 Followers - 32 INR","400 Followers - 49 INR","500 Followers - 63 INR ","1,000 Followers - 103 INR [Recommended]"])
+		elif p == "Refill - Followers will be added again if decreased in next 45 days":
+			v_plan=st.radio("",["50 Followers - 13 INR","100 Followers - 24 INR","200 Followers - 44 INR","300 Followers - 66 INR","500 Followers - 99 INR [Recommended]","1000 Followers - 180 INR"])
 		st.warning("{} is selected".format(v_plan))
 		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
 		ph_no=st.text_input("","+91-")
@@ -226,7 +317,7 @@ def normal_user():
 	elif var_a == "Likes":
 		st.subheader("2. Select the plan")
 		
-		v_plan=st.radio("",["100 Likes - 9 INR","200 Likes - 17 INR","300 Likes - 24 INR","400 Likes - 31 INR","500 Likes - 38 INR","1000 Likes - 73 INR"])
+		v_plan=st.radio("",["100 Likes - 10 INR","200 Likes - 18 INR","300 Likes - 29 INR","400 Likes - 39 INR","500 Likes - 49 INR [Recommended]","1000 Likes - 98 INR"])
 		st.warning("{} is selected".format(v_plan))
 		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
 		ph_no=st.text_input("","+91-")
@@ -256,8 +347,37 @@ def normal_user():
 			st.warning("Enter correct phone number")
 
 		buff=insta_link(v_plan,ph_no,1)
-					
-	st.subheader(" ")
+	st.subheader(" ")				
+	#st.subheader("Track your order")
+	#st.write("")
+
+	track="""
+		<div style="background-color:#DD2A7B;padding:0px">
+		<h2 style="color:#ffffff;text-align:center;font-weight:bold;">Track your Order</h2>
+		</div>
+		"""
+	st.markdown(track,unsafe_allow_html=True)
+
+	row_idd=st.text_input("Enter your Tracking ID")
+	#st.write("This is track id given by user ",row_idd)
+	
+	if st.button("Track my order"):
+		try:
+			v_s=view_status(row_idd)
+			b=v_s[0]
+			if b[0] == "Success":
+				st.success("Your order is Successful")
+			else:
+				st.info("Don't Worry, your order is under process. We let you know when it is finished")
+		except:
+			st.warning("Please enter correct order ID")	
+
+
+			
+
+
+
+
 	st.subheader(" ")
 	st.subheader(" ")
 	st.subheader(" ")
