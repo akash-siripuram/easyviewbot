@@ -78,7 +78,7 @@ def insta_link(a,b,c):
 		st.success("We are paying for you, So it is free. Please share it with your friends")	
 		st.subheader("")
 		if st.button("Click here, We paid for you"):
-			if len(link) > 0 and len(b) ==14:
+			if len(link) > 0 and len(b) ==10:
 				create_usertable()
 				add_userdata(link,a,b,"Processing")
 				st.write("You have completed it in just 4 Steps")
@@ -123,7 +123,7 @@ def insta_link(a,b,c):
 		#st.success(" -  9493736321@okbizaxis  ".format(a))
 		st.subheader("")
 		if st.button("Click Here to submit"):
-			if len(link) > 0 and len(b) ==14:
+			if len(link) > 0 and len(b) ==10:
 				create_usertable()
 				add_userdata(link,a,b,"Processing")
 				st.write("You have completed it in just 4 Steps")
@@ -169,7 +169,7 @@ def insta_link(a,b,c):
 		#st.subheader("")
 		st.subheader("")
 		if st.button("Click here and send the money"):
-			if len(link) > 0 and len(b) ==14:
+			if len(link) > 0 and len(b) ==10:
 				create_usertable()
 				add_userdata(link,a,b,"Processing")
 				st.write("You have completed it in just 4 Steps")
@@ -333,7 +333,7 @@ def normal_user():
 		st.warning("{} is selected".format(v_plan))
 		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
 		ph_no=st.text_input("+91-")
-	        if len(ph_no) == 10:
+		if len(ph_no) == 10:
 			st.write("")
 		else:
 			st.warning("Enter correct phone number")
