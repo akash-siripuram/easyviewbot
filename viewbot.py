@@ -2,51 +2,51 @@ import streamlit as st
 import sqlite3
 import pandas as pd
 
-con=sqlite3.connect("bismillah.db")
+con=sqlite3.connect("mango.db")
 c=con.cursor()
 
 
 
 def create_usertable():
-	c.execute("CREATE TABLE IF NOT EXISTS user_table2(id integer primary key autoincrement, instalink Text NOT NULL,plan text NOT NULL,ph_no text NOT NULL,status text)")
+	c.execute("CREATE TABLE IF NOT EXISTS user_table3(id integer primary key autoincrement, instalink Text NOT NULL,plan text NOT NULL,ph_no text NOT NULL,status text)")
 	
 
-def add_userdata(instalink,plan,ph_no,status):
-	c.execute("INSERT INTO user_table2(instalink,plan,ph_no,status) VALUES(?,?,?,?)",(instalink,plan,ph_no,status))
+def add_userdata(instalink,plan,ph_no,stats):
+	c.execute("INSERT INTO user_table3(instalink,plan,ph_no,status) VALUES(?,?,?,?)",(instalink,plan,ph_no,stats))
 	con.commit()
 
 def view_link_plan():
-	c.execute("Select instalink as Instagram_Link,plan as Selected_Plan from user_table2")
+	c.execute("Select instalink as Instagram_Link,plan as Selected_Plan from user_table3")
 	data=c.fetchall()
 	return data
 def view_plan_phno():
-	c.execute("Select plan as Selected_Plan,ph_no as Phone_Number from user_table2")
+	c.execute("Select plan as Selected_Plan,ph_no as Phone_Number from user_table3")
 	data=c.fetchall()
 	return data
 def view_phno_link():
-	c.execute("Select instalink as Instagram_Link,ph_no as Phone_Number from user_table2")
+	c.execute("Select instalink as Instagram_Link,ph_no as Phone_Number from user_table3")
 	data=c.fetchall()
 	return data
 def delete_table():
-	c.execute("DROP TABLE user_table2")
+	c.execute("DROP TABLE user_table3")
 	
 def view_instalink():
-	c.execute("Select id,instalink,status from user_table2")
+	c.execute("Select id,instalink,status from user_table3")
 	data=c.fetchall()
 	return data
 def view_plan():
-	c.execute("Select id,plan,status from user_table2")
+	c.execute("Select id,plan,status from user_table3")
 	data=c.fetchall()
 	return data
 def change_status(status,row_id):
-	c.execute("update user_table2 set status=? where id =?",(status,row_id))
+	c.execute("update user_table3 set status=? where id =?",(status,row_id))
 	con.commit()
 def give_id(plan,ph_no):
-	c.execute("SELECT id FROM user_table2 where plan = ? and ph_no = ? ORDER BY id DESC LIMIT 2",(plan,ph_no))
+	c.execute("SELECT id FROM user_table3 where plan = ? and ph_no = ? ORDER BY id DESC LIMIT 3",(plan,ph_no))
 	data=c.fetchall()
 	return data
 def view_status(row_idd):
-	c.execute("Select status from user_table2 where id=?",(row_idd,))
+	c.execute("Select status from user_table3 where id=?",(row_idd,))
 	data=c.fetchall()
 	return data
 
@@ -284,10 +284,8 @@ def normal_user():
 		v_plan=st.radio("",["100 Views - 4 INR","1000 Views - 9 INR","10000 Views - 29 INR [Recommended]","100000 Views - 49 INR"])
 		#st.warning("{} is selected".format(v_plan))
 		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
-		ph_no=st.text_input("","+91-")
-		if len(ph_no) == 4:
-			st.write("")
-		elif len(ph_no) == 14:
+		ph_no=st.text_input("+91-")
+		if len(ph_no) == 10:
 			st.write("")
 		else:
 			st.warning("Enter correct phone number")
@@ -304,10 +302,8 @@ def normal_user():
 			v_plan=st.radio("",["50 Followers - 13 INR","100 Followers - 24 INR","200 Followers - 44 INR","300 Followers - 66 INR","500 Followers - 99 INR [Recommended]","1000 Followers - 180 INR"])
 		st.warning("{} is selected".format(v_plan))
 		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
-		ph_no=st.text_input("","+91-")
-		if len(ph_no) == 4:
-			st.write("")
-		elif len(ph_no) == 14:
+		ph_no=st.text_input("+91-")
+		if len(ph_no) == 10:
 			st.write("")
 		else:
 			st.warning("Enter correct phone number")
@@ -320,10 +316,8 @@ def normal_user():
 		v_plan=st.radio("",["100 Likes - 10 INR","200 Likes - 18 INR","300 Likes - 29 INR","400 Likes - 39 INR","500 Likes - 49 INR [Recommended]","1000 Likes - 98 INR"])
 		st.warning("{} is selected".format(v_plan))
 		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
-		ph_no=st.text_input("","+91-")
-		if len(ph_no) == 4:
-			st.write("")
-		elif len(ph_no) == 14:
+		ph_no=st.text_input("+91-")
+		if len(ph_no) == 10:
 			st.write("")
 		else:
 			st.warning("Enter correct phone number")
@@ -338,10 +332,8 @@ def normal_user():
 		v_plan="25 Free Followers"
 		st.warning("{} is selected".format(v_plan))
 		st.subheader("3. Enter your Phone number and relax, we will contact you shortly")
-		ph_no=st.text_input("","+91-")
-		if len(ph_no) == 4:
-			st.write("")
-		elif len(ph_no) == 14:
+		ph_no=st.text_input("+91-")
+	        if len(ph_no) == 10:
 			st.write("")
 		else:
 			st.warning("Enter correct phone number")
